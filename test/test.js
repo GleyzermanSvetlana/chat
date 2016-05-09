@@ -25,10 +25,10 @@ Promise.promisifyAll(dbClient.prototype);
 
 before(function() {
     c = new dbClient({
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'root',
-        db: 'mydb'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        db: process.env.DB_NAME
     });
     return Server.start();
 });
@@ -75,7 +75,7 @@ function Client() {
 }
 
 Client.prototype.connect = function() {
-    return this.ws.connect('ws://localhost:' + process.env.PORT);
+    return this.ws.connect('ws://' + process.env.WS_HOST);
 };
 
 Client.prototype.disconnect = function() {
@@ -276,7 +276,7 @@ describe('Server', function() {
         .then(() => client.login(username, "password"))
         .then(() => client.getMessages())
         .then(() => client.disconnect());
-        // FIXME: не дописано. надо желательно залезть в базу данных и посмотреть, что там именно эти сообщения и есть
+        
     });
      
     it('can prevent registration with the same logins', function() {

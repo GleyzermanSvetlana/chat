@@ -10,20 +10,20 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+-- DROP SCHEMA IF EXISTS `mydb` ;
 
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+-- CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+-- USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`User`
+-- Table `User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`User` ;
+DROP TABLE IF EXISTS `User` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`User` (
+CREATE TABLE IF NOT EXISTS `User` (
   `Username` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `Kicked` TINYINT(1) NULL,
@@ -32,11 +32,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Message`
+-- Table `Message`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Message` ;
+DROP TABLE IF EXISTS `Message` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Message` (
+CREATE TABLE IF NOT EXISTS `Message` (
   `idMessage` INT NOT NULL AUTO_INCREMENT,
   `UserFrom` VARCHAR(45) NOT NULL,
   `Text` TEXT(200) NOT NULL,
@@ -46,12 +46,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Message` (
   INDEX `UserFrom_idx` (`UserFrom` ASC),
   CONSTRAINT `UserFrom`
     FOREIGN KEY (`UserFrom`)
-    REFERENCES `mydb`.`User` (`Username`)
+    REFERENCES `User` (`Username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `UserTo`
     FOREIGN KEY (`UserTo`)
-    REFERENCES `mydb`.`User` (`Username`)
+    REFERENCES `User` (`Username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

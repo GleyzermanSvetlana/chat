@@ -14,10 +14,10 @@ var sockets = {};
 
 module.exports.start = function() {
     c = new dbClient({
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'root',
-        db: 'mydb'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        db: process.env.DB_NAME
     });
     prep_login = c.prepare('SELECT * FROM User WHERE Username = :username AND Password = :password');
     prep_registration = c.prepare('INSERT INTO User (username, password) VALUES (:username, :password)');
